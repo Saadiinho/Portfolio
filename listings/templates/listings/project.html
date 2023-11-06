@@ -1,0 +1,35 @@
+{% extends 'listings/base.html' %}
+
+{% block content %}
+<div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh; margin-top: 20rem; margin-bottom: 20rem;">
+    <div class="card shadow-lg mb-5 bg-body-tertiary rounded" style="width: 40rem;">
+      <img src="{{ project.logo.url }}" class="card-img-top" alt="Profil">
+      <div class="card-body d-flex flex-column align-items-center">
+        <h5 class="card-title text-center"> {{ project.name }} </h5>
+        <p>
+            Langage utilisé : {{ project.language }}
+        </p>
+        <p>
+            {% if project.isFinish %}
+                <span class="badge bg fs-6">Terminé</span>
+            {% else %}
+                <span class="badge bg-secondary fs-6">En cours</span>
+            {% endif %}
+        </p>
+        <p>
+            {{ project.description }}
+        </p>
+        <p>
+            {{ project.features }}
+        </p>
+         <div class="row mt-3">
+          <a href="{{ project.gitHubLink }}" class="btn btn-bg mb-3" target="_blank">Voir le code</a>
+          <a href="{{ project.viewsLink }}" class="btn btn-bg mb-3" target="_blank">Voir un aperçu de ce projet &nbsp; </a>
+          <a href="{% url 'portfolio' %}#portfolio" class="btn btn-bg-danger">Retour</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+{% endblock %}

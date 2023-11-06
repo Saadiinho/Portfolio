@@ -1,0 +1,145 @@
+{% extends 'listings/base.html' %}
+  
+{% block content %}
+  <main>
+    <!--Présentation-->
+    <section id="saadRaf" class="my-5">
+      <div class="container">
+        <div class="row gy-4 align-items-center">
+          <div class="col-12 col-md-6">
+            <h1 class="fw-bold animate__animated animate__fadeInTopLeft">Je suis Saad Rafiqul Développeur</h1>
+            <h2 class="fw-light animate__animated animate__fadeInBottomLeft animate__delay-1s">Bienvenue dans mon univers créatif</h2>
+            <h6 class="fw-light animate__animated animate__fadeInRightBig animate__delay-2s">Avec mon expertise en développement web, 
+              je crée des solutions personnalisées qui dépassent vos attentes. 
+              Que ce soit pour un site web, une application ou des services de conseil,
+               je suis là pour transformer vos idées en réalité technologique. 
+               Faites confiance à mon savoir-faire pour propulser votre entreprise 
+               vers de nouveaux horizons numériques.</h6>
+            <a href="#expertise" class="btn btn-bg mt-5 animate__pulse animate__animated animate__delay-4s animate__infinite">Mon expertise web</a>
+          </div>
+          <div class="col-12 col-md-6">
+            <img src="/media/images/portrait.png" alt="Saad Rafiqul" width="100%" class="animate__animated animate__backInUp animate__delay-3s">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Expertise-->
+    <section id="expertise" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="mb-0">Mon expertise</h2>
+        <h3 class="fw-light fs-5">Langages maitrisés</h3>
+        <div class="row gy-4 mt-4">
+          <!-- Developpement -->
+          <div class="col-12 col-md-7">
+            {% for language in languages %}
+            <div class="mb-3 p-3 bg-white shadow p-3 mb-2 bg-body-tertiary rounded">
+              <div class="row align-items-center">
+                <div class="col-5 col-sm-4 col-lg-3 col-xl-2">
+                  <div class="d-flex align-items-center">
+                    {% autoescape off %}
+                      {{ language.logo }}
+                    {% endautoescape %}
+                    <p class="fw-bold m-0"> {{ language.name }} </p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="progress">
+                    <div class="progress-bar w-{{ language.maitrise }} bg" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                         aria-valuemax="100" data-bs-toggle="tooltip" data-bs-title="{{language.maitrise}}%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <!--Fin-->
+          <!--Image-->
+          <div class="col-12 offset-md-1 col-md-4">
+            <img src="/media/images/code.jpg" alt="écran montrant du code php" width="100%">
+          </div>
+        </div>
+        <!-- Image -->
+        <div class="row gy-4 mt-4">
+          <div class="col-12 col-md-4">
+            <img src="/media/images/design.jpg" alt="écran montrant des designs" width="100%">
+          </div>
+          <!--Framework-->
+          <div class="col-12 offset-md-1 col-md-7">
+            {% for framework in frameworks %}
+            <div class="mb-3 p-3 bg-white shadow p-3 mb-2 bg-body-tertiary rounded">
+              <div class="row align-items-center">
+                <div class="col-5 col-sm-4 col-lg-3 col-xl-2">
+                  <div class="d-flex align-items-center">
+                    {% autoescape off %}
+                      {{ framework.logo }}
+                    {% endautoescape %}
+                    <p class="fw-bold m-0"> {{ framework.name }} </p>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="progress">
+                    <div class=" bg progress-bar w-{{ framework.maitrise }}" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                         aria-valuemax="100" data-bs-toggle="tooltip" data-bs-title="{{framework.maitrise}}%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <!--Fin-->
+        </div>
+      </div>
+    </section>
+
+    <!--Portfolio-->
+    <section id="portfolio" class="py-5">
+      <div class="container">
+          <h2 class="mb-0">Mon portfolio</h2>
+          <h3 class="fw-light fs-5">Projets perso et pro</h3>
+          <!--Affichage de projet-->
+          <div class="row gy-4 gy-md-0 mt-4">
+              {% for project in projects %}
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card shadow mb-4 bg-body-tertiary rounded" style="height: 500px;">
+                        <img src="{{ project.logo.url }}" class="card-img-top" alt="{{ project.name }} Logo" style="height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.name }}</h5>
+                            <p class="card-text">
+                              {{ project.description }}
+                            </p>
+                            <a class="btn btn-bg" style="position: absolute; bottom: 1rem;" href="{% url 'portfolio-project' project.id %}">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+          </div>
+          <!--Fin-->
+      </div>
+  </section>
+
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="mb-0">Un projet de création web ?</h2>
+        <h3 class="fw-light fs-5">Allons en discuter autour d'un café</h3>
+        <div class="row gy-4 mt-4">
+            <div class="col-12 col-md-5">
+                <img src="/media/images/grab-a-coffee.jpg" alt="Image d'une tasse de café" width="100%">
+            </div>
+            <div class="col-12 offset-md-1 col-md-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Envoyer" class="btn btn-bg w-100">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+  
+
+  </main>
+  
+{% endblock %}

@@ -1,0 +1,28 @@
+.bg{
+    background-color: #138D75;
+}
+.text-primary1{
+    color: #138D75;
+}
+
+.btn-bg{
+    background-color: #138D75;
+    color: #fff;
+}
+
+.btn-bg:hover{
+    background-color: #fff;
+    color: #138D75;
+    border: 1px solid #138D75;
+}
+
+.btn-bg-danger{
+    background-color: #CB4335;
+    color: #fff;
+}
+
+.btn-bg-danger:hover{
+    background-color: #fff;
+    color: #CB4335;
+    border: 1px solid #CB4335;
+}
